@@ -29,7 +29,7 @@ input_lines = list(itertools.islice(sys.stdin, 9))
 
 
 instruction = input_lines[-1].strip("\n")
-initial_state = Board(convert_board(input_lines[:8]))
+initial_state = State(convert_board(input_lines[:8]))
 
 root = Node(initial_state, None, None)
 

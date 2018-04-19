@@ -1,5 +1,5 @@
 from MoveFinder import *
-from Board import *
+from state import *
 
 class Node:
     parent = None
@@ -28,7 +28,7 @@ class Node:
         # generate new boards and nodes for each move
         children = []   # list of nodes
         for move in moves:
-            b = Board.generate(self.board, move)
+            b = State.generate(self.board, move)
             child = Node(b, self, move)
             children.append(child)
 

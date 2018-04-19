@@ -1,21 +1,17 @@
-class Board:
-    array = [] # 2d array of chars
-    white = 0
-    black = 0
+class State:
+    board = []
+    # 2d array of chars representing board and pieces.
+    # blank: "-",  black: "@", white: "O"
+    turns = None  # int. total number of moves made by BOTH players so far
+    current_player = None  # int.  -1 = "white" or  1 = "black"
 
-    # generate board based on specified list of strings
-    def __init__(self, board_list):
 
-        # count each type of piece
-        for row in board_list:
-            for char in row:
-                if char == "O":
-                    self.white += 1
-                else:
-                    if char == "@":
-                        self.black += 1
 
-        self.array = board_list
+    # generate state based on provided board
+    def __init__(self, turns, current_player,  board_list):
+        self.turns = turns
+        self.current_player = current_player
+        self.board = board_list
 
     @staticmethod
     def is_surrounded(x, y, board_array):
@@ -63,24 +59,24 @@ class Board:
         array[y2][x2] = temp
 
         # work out which (if any) pieces got taken
-        if(Board.is_surrounded(x2-1, y2, array)) :
+        if(State.is_surrounded(x2 - 1, y2, array)) :
             array[y2][x2-1]="-"
-        if (Board.is_surrounded(x2 + 1, y2, array)):
+        if (State.is_surrounded(x2 + 1, y2, array)):
             array[y2][x2 + 1] = "-"
-        if (Board.is_surrounded(x2, y2-1, array)) :
+        if (State.is_surrounded(x2, y2 - 1, array)) :
             array[y2-1][x2]="-"
-        if (Board.is_surrounded(x2, y2+1, array)):
+        if (State.is_surrounded(x2, y2 + 1, array)):
             array[y2+1][x2] = "-"
-        if(Board.is_surrounded(x2, y2, array)) :
+        if(State.is_surrounded(x2, y2, array)) :
             array[y2][x2]="-"
         # create and return the Board object
 
-        return Board(array)
+        return State(array)
 
     def print_board(self):
         print("  01234567")
         i = 0
-        for line in self.array:
+        for line in self.board:
             print(str(i) + " " + "".join(line))
             i += 1
 
