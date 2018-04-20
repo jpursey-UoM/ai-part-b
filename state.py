@@ -51,32 +51,32 @@ class State:
         board = []
         for row in previous.board:
             board.append(list(row))
+        if turn.type != "pass":
+            if turn.type == "move":
+                # move one piece based on move
+                x1, y1, x2, y2 = turn.get_action_parts()
 
-        if turn.type == "move":
-            # move one piece based on move
-            x1, y1, x2, y2 = turn.get_action_parts()
+                temp = board[y1][x1]
+                board[y1][x1] = board[y2][x2]
+                board[y2][x2] = temp
+            elif turn.type == "place":
+                x2, y2 = turn.get_action_parts()
+                if turn.player == "white":
+                    board[y2][x2] = "O"
+                elif turn.player == "black":
+                    board[y2][x2] = "@"
 
-            temp = board[y1][x1]
-            board[y1][x1] = board[y2][x2]
-            board[y2][x2] = temp
-        elif turn.type == "place":
-            x2, y2 = turn.get_action_parts()
-            if turn.player == "white":
-                board[y2][x2] = "O"
-            elif turn.player == "black":
-                board[y2][x2] = "@"
-
-        # work out which (if any) pieces got taken
-        if(State.is_surrounded(y2, x2 - 1, board)) :
-            State.clear_square(y2, x2 - 1, board)
-        if (State.is_surrounded(y2, x2 + 1, board)):
-            State.clear_square(y2, x2 + 1, board)
-        if (State.is_surrounded(y2 - 1, x2, board)) :
-            State.clear_square(y2 - 1, x2, board)
-        if (State.is_surrounded(y2 + 1, x2, board)):
-            State.clear_square(y2 + 1, x2, board)
-        if(State.is_surrounded(y2, x2, board)) :
-            State.clear_square(y2, x2, board)
+            # work out which (if any) pieces got taken
+            if(State.is_surrounded(y2, x2 - 1, board)) :
+                State.clear_square(y2, x2 - 1, board)
+            if (State.is_surrounded(y2, x2 + 1, board)):
+                State.clear_square(y2, x2 + 1, board)
+            if (State.is_surrounded(y2 - 1, x2, board)) :
+                State.clear_square(y2 - 1, x2, board)
+            if (State.is_surrounded(y2 + 1, x2, board)):
+                State.clear_square(y2 + 1, x2, board)
+            if(State.is_surrounded(y2, x2, board)) :
+                State.clear_square(y2, x2, board)
 
         # check if board needs to shrink
         turns = previous.turns + 1

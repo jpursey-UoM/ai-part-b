@@ -1,5 +1,6 @@
 from MoveFinder import *
 from state import *
+import random
 
 # COMP30024 Part B
 # Player that picks randomly from the possible moves
@@ -9,16 +10,43 @@ from state import *
 class Player:
     current = None
     colour = None
+    mf = MoveFinder()
+
     def __init__(self, colour):
-        self.current = State(0, -1, self.new_board())
+        self.current = State(0, -1, Player.new_board())
+        self.colour = colour
 
     def action(self, turns):
-        print("to do: implement Player.action(turns)")
+        # get all the possible actions
+        possible = self.mf.find_all_turns(self.colour, self.current)
+        # choose one randomly
+        choice = random.choice(possible)
+        # update our model
+        self.update(choice.action, self.colour)
 
-    def update(self, action):
-        print("to do: implement Player.update(action)")
+        return choice.action
+
+    def update(self, action, colour=None):
+        if colour is None:
+            if self.colour == "black":
+                colour = "white"
+            else:
+                colour = "black"
+
+        turn_type = ""
+        if action is not None:
+            if type(action[0]) == int:
+                turn_type = "place"
+            else:
+                turn_type = "move"
+        else:
+            turn_type = "pass"
+
+        turn = Turn(turn_type, action, colour)
+        self.current = State.generate(self.current, turn)
 
     # make a new (empty) board array
+    @staticmethod
     def new_board():
         board_len = 8
         board = []
