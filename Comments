@@ -1,0 +1,7 @@
+Representing the shrinking board: 
+In order not to get confused by the number of the rows and columns after the shrinking of the board, we have decided to use hyphens to represent the columns and the rows which no longer exist. 
+Consequently, the number of the columns and the rows keep their original names without having to care about it. 
+We have created two functions for the two shrinking cases. These functions:
+1. Update the edges
+2. Update the corners
+3. Check if pieces are being eliminated because of the post-shrinking configuration. 
