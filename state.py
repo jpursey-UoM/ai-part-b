@@ -45,22 +45,26 @@ class State:
 
     # generate board based on parent and move
     @staticmethod
-    def generate(previous, move_m):
+    def generate(previous, turn):
         # copy parent
 
         board = []
         for row in previous.board:
             board.append(list(row))
 
-        # move one piece based on move
-        x1 = move_m.start_x
-        y1 = move_m.start_y
-        x2 = move_m.end_x
-        y2 = move_m.end_y
+        if turn.type == "move":
+            # move one piece based on move
+            x1, y1, x2, y2 = turn.get_action_parts()
 
-        temp = board[y1][x1]
-        board[y1][x1] = board[y2][x2]
-        board[y2][x2] = temp
+            temp = board[y1][x1]
+            board[y1][x1] = board[y2][x2]
+            board[y2][x2] = temp
+        elif turn.type == "place":
+            x2, y2 = turn.get_action_parts()
+            if turn.player == "white":
+                board[y2][x2] = "O"
+            elif turn.player == "black":
+                board[y2][x2] = "@"
 
         # work out which (if any) pieces got taken
         if(State.is_surrounded(y2, x2 - 1, board)) :

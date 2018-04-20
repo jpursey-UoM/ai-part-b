@@ -3,7 +3,7 @@ import sys
 from node import *
 from MoveFinder import *
 from greedysearch import *
-from Move import *
+from turn import *
 
 MASSACRE_S = "Massacre"
 MOVES_S = "Moves"
@@ -39,8 +39,8 @@ if instruction == MASSACRE_S:
     if(goal is not None):
         moves = goal.get_path()
         for m in moves:
-            assert(type(m) == Move)
-            print(m.toString())
+            assert(type(m) == Turn)
+            print(m.to_string())
 elif instruction == MOVES_S:
     mf = MoveFinder()
     # print white

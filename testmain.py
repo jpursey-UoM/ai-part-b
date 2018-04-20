@@ -1,5 +1,6 @@
 from state import *
-from Move import *
+from turn import *
+
 
 def convert_board(board_list):
     # convert the input list of strings to a list of lists of chars,
@@ -14,6 +15,7 @@ def convert_board(board_list):
 
     return new_list
 
+
 # make a new (empty) board array
 def new_board():
     board_len = 8
@@ -21,7 +23,7 @@ def new_board():
     for i in range(board_len):
         row = []
         for j in range(board_len):
-            if(i == 0 or i == 7) and (j==0 or j == 7):
+            if(i == 0 or i == 7) and (j == 0 or j == 7):
                 row.append("X")
             else:
                 row.append("-")
@@ -30,36 +32,15 @@ def new_board():
 
 
 board = new_board()
-board[1][1] = "@"
-board[1][2] = "@"
-board[1][3] = "O"
-board[3][3] = "O"
+first = State(0, -1, board)
+place_turn = Turn("place",  (3, 3), "white")
+second = State.generate(first, place_turn)
+second.print_board()
+place_turn2 = Turn("place",  (1, 1), "black")
+third = State.generate(second, place_turn2)
+third.print_board()
+move_turn = Turn("move", ((3, 3), (2, 3)), "white")
+fourth = State.generate(third, move_turn)
+fourth.print_board()
 
-board[4][1] = "@"
-board[5][1] = "O"  # should be surrounded by corner
-
-board[6][4] = "@"
-board[6][5] = "O"  # should be surrounded by corner
-
-board[1][4] = "@"
-board[1][5] = "O"  # should be surrounded by corner
-
-board[2][6] = "@"
-board[3][6] = "O"  # should be surrounded by corner
-
-
-current = State(127+24, -1, board)
-current.print_board()
-
-next_state = State.generate(current, Move(3,3,4,3));
-next_state.print_board()
-
-next_state.board[2][3] = "O"
-next_state.print_board()
-next_state = State.generate(next_state, Move(3,2,3,1))
-next_state.print_board()
-
-next_state.turns = 191 + 24
-another_state = State.generate(next_state, Move(4,6,4,5))
-another_state.print_board()
 

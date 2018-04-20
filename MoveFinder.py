@@ -1,4 +1,4 @@
-from Move import *
+from turn import *
 
 
 class MoveFinder:
@@ -36,27 +36,27 @@ class MoveFinder:
 
         # check up
         if(self.check_valid(board, row - 1, col)):
-            moves += [Move(col, row, col, row - 1)]
+            moves += [Turn(col, row, col, row - 1)]
         elif(self.check_valid(board, row - 2, col)):
-            moves += [Move(col, row, col, row - 2)]
+            moves += [Turn(col, row, col, row - 2)]
 
         # check down
         if(self.check_valid(board, row + 1, col)):
-            moves += [Move(col, row, col, row + 1)]
+            moves += [Turn(col, row, col, row + 1)]
         elif(self.check_valid(board, row + 2, col)):
-            moves += [Move(col, row, col, row + 2)]
+            moves += [Turn(col, row, col, row + 2)]
 
         # check left
         if (self.check_valid(board, row, col - 1)):
-            moves += [Move(col, row, col -1 , row)]
+            moves += [Turn(col, row, col - 1, row)]
         elif (self.check_valid(board, row, col - 2)):
-            moves += [Move(col, row, col - 2, row)]
+            moves += [Turn(col, row, col - 2, row)]
 
         # check right
         if (self.check_valid(board, row, col + 1)):
-            moves += [Move(col, row, col + 1, row)]
+            moves += [Turn(col, row, col + 1, row)]
         elif (self.check_valid(board, row, col + 2)):
-            moves += [Move(col, row, col + 2, row)]
+            moves += [Turn(col, row, col + 2, row)]
 
         return moves
 
