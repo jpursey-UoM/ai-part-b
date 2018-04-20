@@ -1,3 +1,6 @@
+import random
+
+from MoveFinder import *
 from state import *
 from turn import *
 
@@ -32,15 +35,25 @@ def new_board():
 
 
 board = new_board()
-first = State(0, -1, board)
-place_turn = Turn("place",  (3, 3), "white")
-second = State.generate(first, place_turn)
-second.print_board()
-place_turn2 = Turn("place",  (1, 1), "black")
-third = State.generate(second, place_turn2)
-third.print_board()
-move_turn = Turn("move", ((3, 3), (2, 3)), "white")
-fourth = State.generate(third, move_turn)
-fourth.print_board()
+current = State(0, -1, board)
+mf = MoveFinder()
+player = "white"
+i = 0
+while (True):
+    print("i: " + str(i))
+    turns = mf.find_all_turns(player, current)
+    if len(turns) == 0:
+        print(player + " loses!")
+        break
+    turn = random.choice(turns)
+    print(turn)
+    current = State.generate(current, turn)
+    current.print_board()
+    print()
+    if player == "white":
+        player = "black"
+    else:
+        player = "white"
+    i += 1
 
 

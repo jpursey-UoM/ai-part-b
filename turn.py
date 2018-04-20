@@ -19,5 +19,8 @@ class Turn:
         elif self.type == "place":
             return [a[0], a[1]]
 
-    def to_string(self):
-        return "("+str(self.action[0]) + " -> " + str(self.action[1]) + ")"
+    def __str__(self):
+        if self.type == "move":
+            return "("+str(self.action[0]) + " -> " + str(self.action[1]) + ")"
+        elif self.type == "place":
+            return "(" + str(self.action[0]) + ", " + str(self.action[1]) + ")"

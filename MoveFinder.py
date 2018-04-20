@@ -12,51 +12,80 @@ class MoveFinder:
                 (col > self.BOARD_SIZE)):
             return False
         # not occupied and not a corner
-        if (board.array[row][col] != "-"):
+        if board[row][col] != "-":
             return False
 
         return True
 
-    def find_all_moves(self, symbol, board):
-        board_array = board.array
-        moves = []
-        for row in range(len(board_array)):
-            for cell in range(len(board_array[row])):
-                if board_array[row][cell] == symbol:
-                  moves += (self.find_moves(row, cell, board))
-        return moves
+    # find all possible actions for all pieces of player's colour
+    def find_all_turns(self, player, state):
+        board = state.board
+        turns = []
 
-    def find_moves(self, row, col, board):
-        board_l = board.array
+        # check if in placing phase or moving phase
+        if state.turns < 24:
+            turns = self.find_places(player, state)
+        else:
+            symbol = None
+            if player == "black":
+                symbol = "@"
+            elif player == "white":
+                symbol = "O"
+
+            for row in range(len(board)):
+                for col in range(len(board[row])):
+                    if board[row][col] == symbol:
+                        turns += (self.find_moves(row, col, state, player))
+        return turns
+
+    def find_places(self, player, state):
+        start_row = 0
+        end_row = 7
+        if player == "black":
+            start_row = 2
+        elif player == "white":
+            end_row = 5
+
+        turns = []
+        for row in range(start_row, end_row + 1):
+            for col in range(8):
+                if self.check_valid(state.board, row, col):
+                    turns.append(Turn("place", (col, row), player))
+
+        return turns
+
+    # find all moves for a particular piece
+    def find_moves(self, row, col, state, player):
+        board = state.board
         # check there's a piece
-        if not board_l[row][col] in self.PIECES:
+        if not board[row][col] in self.PIECES:
             return None
 
         moves = []
 
         # check up
         if(self.check_valid(board, row - 1, col)):
-            moves += [Turn(col, row, col, row - 1)]
+            moves.append(Turn("move", ((col, row), (col, row - 1)), player))
         elif(self.check_valid(board, row - 2, col)):
-            moves += [Turn(col, row, col, row - 2)]
+            moves.append(Turn("move", ((col, row), (col, row - 2)), player))
 
         # check down
         if(self.check_valid(board, row + 1, col)):
-            moves += [Turn(col, row, col, row + 1)]
+            moves.append(Turn("move", ((col, row), (col, row + 1)), player))
         elif(self.check_valid(board, row + 2, col)):
-            moves += [Turn(col, row, col, row + 2)]
+            moves.append(Turn("move", ((col, row), (col, row + 2)), player))
 
         # check left
         if (self.check_valid(board, row, col - 1)):
-            moves += [Turn(col, row, col - 1, row)]
+            moves.append(Turn("move", ((col, row), (col - 1, row)), player))
         elif (self.check_valid(board, row, col - 2)):
-            moves += [Turn(col, row, col - 2, row)]
+            moves.append(Turn("move", ((col, row), (col - 2, row)), player))
 
         # check right
         if (self.check_valid(board, row, col + 1)):
-            moves += [Turn(col, row, col + 1, row)]
+            moves.append(Turn("move", ((col, row), (col + 1, row)), player))
         elif (self.check_valid(board, row, col + 2)):
-            moves += [Turn(col, row, col + 2, row)]
+            moves.append(Turn("move", ((col, row), (col + 2, row)), player))
 
         return moves
 

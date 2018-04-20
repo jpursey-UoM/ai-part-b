@@ -24,7 +24,7 @@ class Node:
     def expand(self):
         # find all possible moves
         mf = MoveFinder()
-        moves = mf.find_all_moves("O", self.board)
+        moves = mf.find_all_turns("O", self.board)
         # generate new boards and nodes for each move
         children = []   # list of nodes
         for move in moves:

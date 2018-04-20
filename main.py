@@ -29,7 +29,7 @@ input_lines = list(itertools.islice(sys.stdin, 9))
 
 
 instruction = input_lines[-1].strip("\n")
-initial_state = State(convert_board(input_lines[:8]))
+initial_state = State(0, "white", convert_board(input_lines[:8]))
 
 root = Node(initial_state, None, None)
 
@@ -44,6 +44,6 @@ if instruction == MASSACRE_S:
 elif instruction == MOVES_S:
     mf = MoveFinder()
     # print white
-    print(len(mf.find_all_moves("O", root.board)))
+    print(len(mf.find_all_turns("O", root.board)))
     # print black
-    print(len(mf.find_all_moves("@", root.board)))
+    print(len(mf.find_all_turns("@", root.board)))
