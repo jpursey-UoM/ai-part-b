@@ -3,7 +3,6 @@ import random
 from MoveFinder import *
 from state import *
 from turn import *
-import fuckyou.py
 
 def convert_board(board_list):
     # convert the input list of strings to a list of lists of chars,

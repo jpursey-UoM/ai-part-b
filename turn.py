@@ -1,7 +1,4 @@
 class Turn:
-    action = None
-    type = None
-    player = None
 
     def __init__(self, turn_type, action, player):
         assert(turn_type in ["place", "move", "pass"])

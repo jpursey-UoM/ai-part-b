@@ -2,16 +2,12 @@ from MoveFinder import *
 from state import *
 
 class Node:
-    parent = None
-    children = []
-    board = None
-    move = None
-    depth = None
 
     def __init__(self, board, parent, move):
         self.board = board
         self.parent = parent
         self.move = move
+        self.children = []
         if(parent is None):
             self.depth = 0
         else:

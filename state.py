@@ -1,9 +1,8 @@
 class State:
-    board = []
-    # 2d array of chars representing board and pieces.
-    # blank: "-",  black: "@", white: "O", removed by dz: "#"
-    turns = None  # int. total number of turns made by BOTH players so far
-    current_player = None  # int.  -1 = "white" or  1 = "black"
+    # board: 2d array of chars representing board and pieces.
+    #       blank: "-",  black: "@", white: "O", removed by dz: "#"
+    # turns: int. total number of turns made by BOTH players so far
+    # current_player: int.  -1 = "white" or  1 = "black"
 
 
 

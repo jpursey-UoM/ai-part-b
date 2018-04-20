@@ -4,11 +4,10 @@
 
 
 class Player:
-    current_state = None # our model of the current world state, of type State
 
     def __init__(self, colour):
         print("to do: implement Player constructor")
-        current_state = State()
+        self.current_state = State() # our model of the current world state, of type State
 
     def action(self, turns):
         print("to do: implement Player.action(turns)")

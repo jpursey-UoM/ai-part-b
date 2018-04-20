@@ -8,13 +8,11 @@ import random
 
 
 class Player:
-    current = None
-    colour = None
-    mf = MoveFinder()
 
     def __init__(self, colour):
         self.current = State(0, -1, Player.new_board())
         self.colour = colour
+        self.mf = MoveFinder()
 
     def action(self, turns):
         # get all the possible actions
