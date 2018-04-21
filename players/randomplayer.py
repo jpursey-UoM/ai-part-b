@@ -1,5 +1,6 @@
-from MoveFinder import *
-from state import *
+from game.MoveFinder import *
+from game.state import *
+import game.board as board
 import random
 
 # COMP30024 Part B
@@ -10,7 +11,7 @@ import random
 class Player:
 
     def __init__(self, colour):
-        self.current = State(0, -1, Player.new_board())
+        self.current = State(0, -1, board.new_board())
         self.colour = colour
         self.mf = MoveFinder()
 
@@ -43,17 +44,4 @@ class Player:
         turn = Turn(turn_type, action, colour)
         self.current = State.generate(self.current, turn)
 
-    # make a new (empty) board array
-    @staticmethod
-    def new_board():
-        board_len = 8
-        board = []
-        for i in range(board_len):
-            row = []
-            for j in range(board_len):
-                if (i == 0 or i == 7) and (j == 0 or j == 7):
-                    row.append("X")
-                else:
-                    row.append("-")
-            board.append(row)
-        return board
+

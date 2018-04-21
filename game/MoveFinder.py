@@ -1,4 +1,4 @@
-from turn import *
+from game.turn import *
 
 
 class MoveFinder:

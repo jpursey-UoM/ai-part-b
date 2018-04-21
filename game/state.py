@@ -7,10 +7,11 @@ class State:
 
 
     # generate state based on provided board
-    def __init__(self, turns, current_player,  board_list):
+    def __init__(self, turns, current_player,  board_list, turn=None):
         self.turns = turns
         self.current_player = current_player
         self.board = board_list
+        self.turn = turn  # turn that generated this state
 
     @staticmethod
     def is_surrounded(row, col, board_array):
@@ -85,7 +86,7 @@ class State:
             board = State.shrink_board(board, 192)
 
         # create and return the State object
-        return State(turns, -1*previous.current_player, board)
+        return State(turns, -1*previous.current_player, board, turn)
 
     def print_board(self):
         print("  01234567")

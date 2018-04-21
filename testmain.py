@@ -1,8 +1,8 @@
 import random
 
-from MoveFinder import *
-from state import *
-from turn import *
+from game.MoveFinder import *
+from game.state import *
+
 
 def convert_board(board_list):
     # convert the input list of strings to a list of lists of chars,

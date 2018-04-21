@@ -1,9 +1,9 @@
 import itertools
 import sys
-from node import *
-from MoveFinder import *
-from greedysearch import *
-from turn import *
+from graph.node import *
+from game.MoveFinder import *
+from graph.greedysearch import *
+from game.turn import *
 
 MASSACRE_S = "Massacre"
 MOVES_S = "Moves"
