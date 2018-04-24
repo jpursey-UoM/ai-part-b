@@ -25,3 +25,8 @@ class Turn:
             return "(" + str(self.action[0]) + ", " + str(self.action[1]) + ")"
         else:
             return "-"
+
+    def __eq__(self, other):
+        return (self.action == other.action and
+                self.player == other.player and
+                self.type == other.type)
