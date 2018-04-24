@@ -26,11 +26,13 @@ class MoveFinder:
             turns = self.find_places(player, board)
         else:
             symbol = player
-
             for row in range(len(board)):
                 for col in range(len(board[row])):
                     if board[row][col] == symbol:
                         turns += (self.find_moves(row, col, board, player))
+
+        if len(turns) == 0:
+            turns.append(Turn("pass", None, player))  # forfeited turn
         return turns
 
     def find_places(self, player, board):
