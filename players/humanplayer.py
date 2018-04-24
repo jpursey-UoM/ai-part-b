@@ -1,11 +1,11 @@
 from game.MoveFinder import *
 from game.state import *
-import game.board as board
+import game.boardutils as board
 import random
 from game.watchyourback import *
 
 # COMP30024 Part B
-# Player that picks randomly from the possible moves
+# Player that asks for moves from human user
 # Author: Jason Pursey 637551
 
 

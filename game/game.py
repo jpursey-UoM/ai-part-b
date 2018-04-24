@@ -1,5 +1,5 @@
 """Games, or Adversarial Search (Chapter 5)
-    from AIMA textbook - """
+    from AIMA textbook - PUT AUTHOR REF HERE"""
 
 from collections import namedtuple
 import random

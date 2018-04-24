@@ -1,12 +1,12 @@
 import game.state as state
 from game.game import *
 from game.MoveFinder import *
-from game.board import *
+import game.boardutils as boardutils
 
 class WatchYourBack(Game):
 
     def __init__(self):
-        board = new_board()
+        board = boardutils.new_board()
         self.mf = MoveFinder()
         moves = self.mf.find_all_turns("O",board, 0)
         # add turns_taken to gamestate?
@@ -45,7 +45,7 @@ class WatchYourBack(Game):
     def display(self, state):
         print("Total turns: " + str(state.turns_taken))
         print(state.to_move + "'s turn")
-        print_board(state.board)
+        boardutils.print_board(state.board)
 
     @staticmethod
     def compute_utility(board, turns_taken):
@@ -54,22 +54,10 @@ class WatchYourBack(Game):
         if turns_taken < 24:
             # can't win in placing phase
             return 0
-        b, w = WatchYourBack.count(board)
+        b, w = boardutils.count(board)
         if b < 2:
             return 1
         elif w < 2:
             return -1
         else:
             return 0
-
-    @staticmethod
-    def count(board):
-        b = 0
-        w = 0
-        for row in board:
-            for cell in row:
-                if cell == "@":
-                    b += 1
-                elif cell == "O":
-                    w += 1
-        return b, w

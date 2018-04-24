@@ -1,11 +1,8 @@
-from game.MoveFinder import *
-from game.state import *
-import game.boardutils as board
-import random
+
 from game.watchyourback import *
 
 # COMP30024 Part B
-# Player that picks randomly from the possible moves
+# Player that uses minimax with alpha beta pruning
 # Author: Jason Pursey 637551
 
 
@@ -17,10 +14,9 @@ class Player:
         self.state = self.game.initial
 
     def action(self, turns):
-        # get all the possible actions
-        possible = self.state.moves
-        # choose one randomly
-        choice = random.choice(possible)
+        # use AIMA alphabeta alg
+        print("Searching with alpha beta...")
+        choice = alphabeta_cutoff_search(self.state, self.game, 2, None, self.eval)
         # update our model
         self.update(choice.action, self.colour)
 
@@ -50,3 +46,12 @@ class Player:
         self.state = self.game.result(self.state, turn)
 
 
+    def eval(self, state):
+        # greedy and dumb eval function
+        board = state.board
+        b,w = boardutils.count(board)
+        diff = b - w
+        if self.colour == "white":
+            return -diff
+        else:
+            return diff

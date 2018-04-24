@@ -12,9 +12,23 @@ def new_board():
         board.append(row)
     return board
 
+
 def print_board(board):
     print("  01234567")
     i = 0
     for line in board:
         print(str(i) + " " + "".join(line))
         i += 1
+
+
+# count black and white pieces
+def count(board):
+    b = 0
+    w = 0
+    for row in board:
+        for cell in row:
+            if cell == "@":
+                b += 1
+            elif cell == "O":
+                w += 1
+    return b, w

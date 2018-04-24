@@ -1,3 +1,5 @@
+import random
+
 from game.turn import *
 
 
@@ -33,6 +35,11 @@ class MoveFinder:
 
         if len(turns) == 0:
             turns.append(Turn("pass", None, player))  # forfeited turn
+
+        # shuffle for randomness. Don't want to preference moves near
+        # top of board for no reason
+        random.shuffle(turns)
+
         return turns
 
     def find_places(self, player, board):
