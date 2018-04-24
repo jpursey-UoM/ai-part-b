@@ -18,45 +18,39 @@ class MoveFinder:
         return True
 
     # find all possible actions for all pieces of player's colour
-    def find_all_turns(self, player, state):
-        board = state.board
+    def find_all_turns(self, player, board, turns_taken):
         turns = []
 
         # check if in placing phase or moving phase
-        if state.turns < 24:
-            turns = self.find_places(player, state)
+        if turns_taken < 24:
+            turns = self.find_places(player, board)
         else:
-            symbol = None
-            if player == "black":
-                symbol = "@"
-            elif player == "white":
-                symbol = "O"
+            symbol = player
 
             for row in range(len(board)):
                 for col in range(len(board[row])):
                     if board[row][col] == symbol:
-                        turns += (self.find_moves(row, col, state, player))
+                        turns += (self.find_moves(row, col, board, player))
         return turns
 
-    def find_places(self, player, state):
+    def find_places(self, player, board):
         start_row = 0
         end_row = 7
-        if player == "black":
+        if player == "@":
             start_row = 2
-        elif player == "white":
+        elif player == "O":
             end_row = 5
 
         turns = []
         for row in range(start_row, end_row + 1):
             for col in range(8):
-                if self.check_valid(state.board, row, col):
+                if self.check_valid(board, row, col):
                     turns.append(Turn("place", (col, row), player))
 
         return turns
 
     # find all moves for a particular piece
-    def find_moves(self, row, col, state, player):
-        board = state.board
+    def find_moves(self, row, col, board, player):
         # check there's a piece
         if not board[row][col] in self.PIECES:
             return None

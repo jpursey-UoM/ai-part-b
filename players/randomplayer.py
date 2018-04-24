@@ -2,6 +2,7 @@ from game.MoveFinder import *
 from game.state import *
 import game.board as board
 import random
+from game.watchyourback import *
 
 # COMP30024 Part B
 # Player that picks randomly from the possible moves
@@ -11,13 +12,13 @@ import random
 class Player:
 
     def __init__(self, colour):
-        self.current = State(0, -1, board.new_board())
         self.colour = colour
-        self.mf = MoveFinder()
+        self.game = WatchYourBack()
+        self.state = self.game.initial
 
     def action(self, turns):
         # get all the possible actions
-        possible = self.mf.find_all_turns(self.colour, self.current)
+        possible = self.state.moves
         # choose one randomly
         choice = random.choice(possible)
         # update our model
@@ -31,6 +32,10 @@ class Player:
                 colour = "white"
             else:
                 colour = "black"
+        if colour == "white":
+            symbol = "O"
+        else:
+            symbol = "@"
 
         turn_type = ""
         if action is not None:
@@ -41,7 +46,7 @@ class Player:
         else:
             turn_type = "pass"
 
-        turn = Turn(turn_type, action, colour)
-        self.current = State.generate(self.current, turn)
+        turn = Turn(turn_type, action, symbol)
+        self.state = self.game.result(self.state, turn)
 
 

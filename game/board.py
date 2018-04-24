@@ -11,3 +11,10 @@ def new_board():
                 row.append("-")
         board.append(row)
     return board
+
+def print_board(board):
+    print("  01234567")
+    i = 0
+    for line in board:
+        print(str(i) + " " + "".join(line))
+        i += 1
