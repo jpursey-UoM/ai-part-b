@@ -1,7 +1,114 @@
-Representing the shrinking board: 
-In order not to get confused by the number of the rows and columns after the shrinking of the board, we have decided to use hyphens to represent the columns and the rows which no longer exist. 
-Consequently, the number of the columns and the rows keep their original names without having to care about it. 
+--------------------------------------
+ DESCRIPTION OF OUR MODULES / CLASSES:
+--------------------------------------
+
+ We have decided to create the following classes: 
+ - player
+ - state
+ - move
+ - Watchyourback
+
+
+# PLAYER
+
+ The class "player" has 3 methods:
+ - _init_ (colour:string): 
+ - action (turns:int)
+ - update (action:tuple): it is called by the referee program to inform our 
+ player about the opponent’s most recent move, so we do update our board 
+ configuration.
+
+
+
+# STATE
+
+ The class "state" has 2 methods:
+ - generate: 
+
+
+
+# MOVE
+
+ The class "move" has 3 properties:
+ - action: this tuple of tuples tells us which piece is being moved. For 
+ instance, ((a,b),(c,d)) would mean that the piece currently in the (a,b) 
+ position is being moved to the (c,d) position. 
+ - player: this string corresponds to either 'black' or 'white'. It tells us who 
+ is playing the move. 
+ - type: this string corresponds to either 'move' or 'place'. This helps us know 
+ whether we are in the placement or moving phase. 
+
+
+# WATCHYOURBACK
+
+Here are the methods we have had implemented in the class "Watchyourback":
+- actions(self, state): given a game state, this method generates all the legal 
+actions possible from this state, as a list. 
+- result(self, state, move): given a game state and a move, this method returns 
+the game state that we get by making that move on this game state.
+- utility(self, state, player): given a terminal game state and a playe
+- terminal_test(self, state): given a game state, this method should return True 
+if this game state is a terminal state, and False otherwise.
+- to_move(self, state): given a game state, this method returns the player who 
+is to play next. 
+- display(self, state): This method prints the current state of the game.
+
+We have had to implement additional methods for our game:
+- _init_()
+- compute_utility(???): this methods calculates the utility of Watchyourback. 
+If white wins with this move, this method returns 1; if black wins return -1; 
+else returns 0.
+- newboard(???): this methods greates a new board. 
+
+
+
+---------------------------------
+REPRESENTING THE SHRINKING BOARD:
+---------------------------------
+
+In order not to get confused by the number of the rows and columns after the 
+shrinking of the board, we have decided to use hyphens to represent the columns 
+and the rows which no longer exist. 
+Consequently, the number of the columns and the rows keep their original names 
+without having to care about it. 
 We have created two functions for the two shrinking cases. These functions:
 1. Update the edges
 2. Update the corners
-3. Check if pieces are being eliminated because of the post-shrinking configuration. 
+3. Check if pieces are being eliminated because of the post-shrinking 
+configuration.
+
+
+
+
+
+----------------------------
+OUR APPROACH OF THE PROBLEM:
+----------------------------
+
+Step 1:
+
+Our first step was to implement a player that just takes random legal actions. 
+We tested this player by having him play against himself and it worked. We have 
+then decided to head on to step 2. 
+
+
+
+Step 2:
+
+After having implemented a basic "non-intelligent" player, we wanted to create a
+more intelligent agent. This meant using one of the search techniques discussed
+in lectures. 
+We have decided to focus on Minimax. Before doing this, we knew that this 
+algorithm would get tricky because of the great number of game states (it needs 
+to search all the leaves of the tree, which increase exponentially to its depth)
+We knew that we would have to focus on alpha-beta pruning at some point.
+
+We have used the online supporting material for topics covered in Chapter 5 - 
+Adversarial Search in the book Artificial Intelligence: A Modern Approach. 
+To use this code, we needed to create a Watchyourback class that would respect 
+the frame required by the class "Game" of their module. 
+
+
+
+
+
