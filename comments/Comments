@@ -106,7 +106,20 @@ We knew that we would have to focus on alpha-beta pruning at some point.
 We have used the online supporting material for topics covered in Chapter 5 - 
 Adversarial Search in the book Artificial Intelligence: A Modern Approach. 
 To use this code, we needed to create a Watchyourback class that would respect 
-the frame required by the class "Game" of their module. 
+the frame required by the class "Game" of their module. We have implemented this 
+solution. 
+
+However, when testing it, we would only get the following message:
+"maximum recursion depth reached". As we had presumed, the search space was too 
+big for our algorithm to work properly. 
+
+
+
+Step 3:
+
+As Minimax wouldn't work, we have then decided to deal with alpha-beta pruning.
+
+This time, our player worked when testing it. 
 
 
 
