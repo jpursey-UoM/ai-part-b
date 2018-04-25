@@ -125,3 +125,12 @@ This time, our player worked when testing it.
 
 
 
+-----------------------
+TESTING OUR ALGORITHMS:
+-----------------------
+
+We have come up with two ways of testing our algorithm:
+1. we have had our algorithm play against itself;
+2. and we have created a human player so we can play ourselves against our 
+implementer players.
+
