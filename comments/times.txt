@@ -1,0 +1,33 @@
+Against itself:
+d = 3
+
+trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
+1       1:43                    5.7
+2       1:49                    5.5         170
+3       1:26                    5.5         198
+4       1:53                    5.5         203
+5
+--------------
+Avg     1:43
+
+d = 2
+
+trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
+1       0:11                    ??          197
+2       0:29                    5.5         179
+3       0:21                    5.5         174
+4       0:25                    5.5         134
+5
+--------------
+Avg     0:22
+
+Showdown!
+          d
+Game  |  b   w  | Winner | Moves
+1        2   3      w       147
+2        2   3      w       144
+3        3   2      w       191
+4        3   2      b       191
+5        3   2      b       151
+6        3   1      b       192
+7        3   1      b       191

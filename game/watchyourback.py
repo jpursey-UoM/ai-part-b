@@ -55,7 +55,9 @@ class WatchYourBack(Game):
             # can't win in placing phase
             return 0
         b, w = boardutils.count(board)
-        if b < 2:
+        if b == w:
+            return 0
+        elif b < 2:
             return 1
         elif w < 2:
             return -1

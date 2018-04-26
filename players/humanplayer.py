@@ -52,7 +52,6 @@ class Player:
 
                 if len(parts) == 2:
                     choice = Turn("place", (int(parts[0]), int(parts[1])), symbol)
-                    print(choice)
                 elif len(parts) == 4:
                     choice = Turn("move", ((int(parts[0]), int(parts[1])),
                                            (int(parts[2]), int(parts[3]))), symbol)

@@ -15,7 +15,7 @@ class Player:
 
     def action(self, turns):
         # use AIMA alphabeta alg
-        choice = alphabeta_cutoff_search(self.state, self.game, 3, None, self.eval)
+        choice = alphabeta_cutoff_search(self.state, self.game, 1, None, self.eval)
         # update our model
         self.update(choice.action, self.colour)
 
