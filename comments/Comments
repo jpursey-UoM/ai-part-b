@@ -14,6 +14,14 @@ Jason Sean Pursey <jpursey@student.unimelb.edu.au>
 
 
 
+------------------------------
+ GUIDE OF OUR DIFFERENT FILES:
+------------------------------
+
+
+
+
+
 
 --------------------------------------
  DESCRIPTION OF OUR MODULES / CLASSES:
@@ -56,26 +64,45 @@ Jason Sean Pursey <jpursey@student.unimelb.edu.au>
  whether we are in the placement or moving phase. 
 
 
+
 # WATCHYOURBACK
 
-Here are the methods we have had implemented in the class "Watchyourback":
+We wanted to use the AIMA code for our minimax player: to do so, we have had to
+implement a class entitled "Watchyourback" that would fit the template class of 
+the AIMA code.
+
+
+Here are the AIMA methods we have had tp implement in the class "Watchyourback":
+
 - actions(self, state): given a game state, this method generates all the legal 
 actions possible from this state, as a list. 
-- result(self, state, move): given a game state and a move, this method returns 
-the game state that we get by making that move on this game state.
-- utility(self, state, player): given a terminal game state and a playe
+
+- result(self, gamestate, move): given a game state and a move, this method 
+returns the game state that we get by making that move on this game state.
+
+- utility(self, state, player): given a terminal game state and a player, this 
+method returns the utility for that player in the given terminal game state. 
+
 - terminal_test(self, state): given a game state, this method should return True 
 if this game state is a terminal state, and False otherwise.
+
 - to_move(self, state): given a game state, this method returns the player who 
 is to play next. 
+
 - display(self, state): This method prints the current state of the game.
 
-We have had to implement additional methods for our game:
-- _init_()
-- compute_utility(???): this methods calculates the utility of Watchyourback. 
-If white wins with this move, this method returns 1; if black wins return -1; 
-else returns 0.
-- newboard(???): this methods greates a new board. 
+
+We have also had to implement additional methods for our game:
+
+- _init_(self): we create an object of the inherited class "Game" to initialize 
+the game. 
+
+- compute_utility(board, turns_taken): Given a board configuration and the 
+related number of turns taken, this methods calculates the utility of 
+Watchyourback game. If white wins with this move, this method returns 1; if 
+black wins return -1; else returns 0.
+
+
 
 
 
@@ -122,9 +149,13 @@ We knew that we would have to focus on alpha-beta pruning at some point.
 
 We have used the online supporting material for topics covered in Chapter 5 - 
 Adversarial Search in the book Artificial Intelligence: A Modern Approach. 
-To use this code, we needed to create a Watchyourback class that would respect 
-the frame required by the class "Game" of their module. We have implemented this 
-solution. 
+
+To use the alpha-beta AIMA player, we needed to create a Watchyourback class 
+that would respect the frame required by the class "Game" of their module. 
+After having done this, we have implemented our minimax player with the 
+following utility function: returning 1 for a winning state for white, -1 for a
+winning state for black and returning 0 in other cases. 
+
 
 However, when testing it, we would only get the following message:
 "maximum recursion depth reached". As we had presumed, the search space was too 
@@ -134,7 +165,8 @@ big for our algorithm to work properly.
 
 Step 3:
 
-As Minimax wouldn't work, we have then decided to deal with alpha-beta pruning.
+As Minimax alone wouldn't work because of its enormous search space, we have 
+then decided to deal with mimimax combined with alpha-beta pruning.
 
 This time, our player worked when testing it. 
 
@@ -148,6 +180,6 @@ TESTING OUR ALGORITHMS:
 
 We have come up with two ways of testing our algorithm:
 1. we have had our algorithm play against itself;
-2. and we have created a human player so we can play ourselves against our 
-implementer players.
+2. and we have created a human player (humanplayer.py) so that we can play 
+ourselves against our implemented players.
 
