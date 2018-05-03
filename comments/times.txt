@@ -1,5 +1,14 @@
-Against itself:
-d = 3
+We have tested our alpha-beta algorithm in different cases.
+We have had it play against itself, changing the depth. 
+
+
+
+----------------------------------
+1. EQUAL DEPTH BETWEEN THE PLAYERS
+----------------------------------
+
+
+For d = 3:
 
 trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
 1       1:43                    5.7
@@ -10,7 +19,9 @@ trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
 --------------
 Avg     1:43
 
-d = 2
+
+
+For d = 2:
 
 trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
 1       0:11                    ??          197
@@ -20,6 +31,29 @@ trial time (s) (both players)   Memory(Mb)  Turns (moving phase)
 5
 --------------
 Avg     0:22
+
+
+The tricky part here is to reach a compromise between having an 
+intelligent or a quick player. 
+
+
+---------------------------------------
+2. DIFFERENT DEPTHS BETWEEN THE PLAYERS
+---------------------------------------
+
+The idea here was to test whether the depth was meaningful. 
+We thought that there were 2 things that ought to be considered 
+when guessing who would be the winner of the game:
+1. Who is starting the game ? The one who makes the first move has 
+an advantage because the other player would always react (adopting a 
+defense-like behavior). In our implementation, the white was always the one 
+who started. 
+2. What is the depth of each player ? When we increase the depth, we
+increase the number of moves our player can see ahead, and we consequently 
+have our player become more "intelligent". When increasing the depth of 
+one player, we should consequently increase his chances of winnning the game.
+That is what we have tried to check. 
+
 
 Showdown!
           d
