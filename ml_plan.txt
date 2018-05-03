@@ -1,0 +1,25 @@
+Basic idea:
+    - like week 5 lecture
+    - learn as we go (supervised)
+    - after each complete game, analyse result + moves
+    - update weights w/ gradient descent
+
+Features for eval func:
+    - white pieces
+    - black pieces
+    - turns taken
+    - pieces adjacent to enemies
+    - pieces adjacent to friends
+    - pieces adjacent to corners
+    - pieces adjacent to edges
+    - ???
+
+Calculating error:
+    - for each state, diff between eval and actual utility
+    - how to determine actual utility?
+        - If we won or lost?
+        - true minimax? too expensive...
+
+OR MAYBE TDLEAF?
+https://pdfs.semanticscholar.org/a8ac/22052761e4e909fcba8a0014c254f9f9cdd6.pdf
+https://chessprogramming.wikispaces.com/Temporal+Difference+Learning
