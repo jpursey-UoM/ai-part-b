@@ -4,6 +4,6 @@ game = WatchYourBack()
 state = game.initial
 moves = state.moves
 random.shuffle(moves)
-for move in moves:
-    print(move)
+turn = random.choice(moves)
+state = game.result(state, Turn("place", turn, "@"))
 

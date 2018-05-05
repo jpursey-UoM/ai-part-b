@@ -25,6 +25,7 @@ class Player:
 
     def action(self, turns):
         # use AIMA alphabeta alg
+        print("calculating best move...")
         choice = alphabeta_cutoff_search(self.state, self.game, 1, None, self.eval)
         # update our model
         self.update(choice.action, self.colour)
@@ -32,6 +33,9 @@ class Player:
         return choice.action
 
     def update(self, action, colour=None):
+
+        print("Features: ", self.get_features(self.state))
+        input()
         if colour is None:
             if self.colour == "black":
                 colour = "white"
@@ -56,7 +60,10 @@ class Player:
 
 
     def eval(self, state):
-        # greedy and dumb eval function
+        features = self.get_features(state)
+        #weights = self.weights
+
+
         board = state.board
         b,w = boardutils.count(board)
         diff = b - w
@@ -64,6 +71,12 @@ class Player:
             return -diff
         else:
             return diff
+
+    def get_features(self, state):
+        b,w = boardutils.count(state.board)
+        f, en, ed, c = boardutils.count_adjacent(state.board, self.colour)
+        features = [b,w,f,en,ed,c]
+        return features
 
     def teach(self, result):
         """ update the weights after each game """
