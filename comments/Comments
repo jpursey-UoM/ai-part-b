@@ -27,43 +27,6 @@ Jason Sean Pursey <jpursey@student.unimelb.edu.au>
  DESCRIPTION OF OUR MODULES / CLASSES:
 --------------------------------------
 
- We have decided to create the following classes: 
- - player
- - state
- - move
- - Watchyourback
-
-
-# PLAYER
-
- The class "player" has 3 methods:
- - _init_ (colour:string): 
- - action (turns:int)
- - update (action:tuple): it is called by the referee program to inform our 
- player about the opponent’s most recent move, so we do update our board 
- configuration.
-
-
-
-# STATE
-
- The class "state" has 2 methods:
- - generate: 
-
-
-
-# MOVE
-
- The class "move" has 3 properties:
- - action: this tuple of tuples tells us which piece is being moved. For 
- instance, ((a,b),(c,d)) would mean that the piece currently in the (a,b) 
- position is being moved to the (c,d) position. 
- - player: this string corresponds to either 'black' or 'white'. It tells us who 
- is playing the move. 
- - type: this string corresponds to either 'move' or 'place'. This helps us know 
- whether we are in the placement or moving phase. 
-
-
 
 # WATCHYOURBACK
 
@@ -102,15 +65,16 @@ configuration.
 OUR APPROACH OF THE PROBLEM:
 ----------------------------
 
-Step 1:
+STEP 1:
 
 Our first step was to implement a player that just takes random legal actions. 
 We tested this player by having him play against himself and it worked. We have 
-then decided to head on to step 2. 
+then decided to head on to step 2 in order to create an intelligent agent. 
 
 
 
-Step 2:
+
+STEP 2:
 
 After having implemented a basic "non-intelligent" player, we wanted to create a
 more intelligent agent. This meant using one of the search techniques discussed
@@ -136,7 +100,8 @@ big for our algorithm to work properly.
 
 
 
-Step 3:
+
+STEP 3:
 
 As Minimax alone wouldn't work because of its enormous search space, we have 
 then decided to deal with mimimax combined with alpha-beta pruning.
@@ -146,13 +111,83 @@ This time, our player worked when testing it.
 
 
 
+STEP 4:
+
+The idea was to test our alpha-beta algorithm, and to choose the value of the 
+variables so as to come up with the most intelligent agent possible. 
+
+We have had our alpha-beta algorithm play against itself, changing the depth. 
+
+
+1. Equal depth between the players:
+
+* For d = 2 for each player: 
+It takes approximately 22sec and 5.5 Mb to play the entire game. 
+(calculation done for 5 different games)
+    
+* For d = 3 for each player:
+It takes approximately 1min 43sec and 5.5 Mb to play the entire game. 
+(calculation done for 5 different games)
+
+
+As soon as the depth increases, the amount of time taken by our player to place
+or to move a piece skyrockets. To build the most intelligent agent possible, we
+need to look for an agent that has a great depth but that still meets our time 
+and memory contraints. 
+The tricky part here is to reach a compromise between having an intelligent or a 
+quick player. 
+
+
+2. Different depth between the players:
+
+The idea here was to test whether the depth was really meaningful. 
+We thought that there were 2 things that ought to be considered when guessing 
+who would be the winner of the game:
+1. Who is starting the game ? The one who makes the first move has an advantage 
+because the other player would always react (adopting a defense-like behaviour). 
+In our implementation, the white was always the one who started. 
+2. What is the depth of each player ? When we increase the depth, we increase 
+the number of moves our player can see ahead, and we consequently have our 
+player become more "intelligent". When increasing the depth of one player, we 
+should consequently increase his chances of winnning the game.
+That is what we have tried to check by having two player with different depths 
+play against each other. 
+
+Game  |  depths  | Winner | Moves
+      |  b   w   |        | 
+1        2   3      w       147
+2        2   3      w       144
+3        3   2      w       191
+4        3   2      b       191
+5        3   2      b       151
+6        3   1      b       192
+7        3   1      b       191
+
+We see that if a player has a greater depth, then he is more likely to win, even 
+if he is not the one who starts playing the game. 
+
+
+
+
+STEP 5:
+
+After having implemented an intelligent agent, we have decided to come up with a 
+basically more intelligent and creative agent. To do so, we have try to used 
+machine learning. 
+
+
+
+
 
 -----------------------
 TESTING OUR ALGORITHMS:
 -----------------------
 
-We have come up with two ways of testing our algorithm:
+In general, we have come up with two ways of testing our algorithm:
+
 1. we have had our algorithm play against itself;
+
 2. and we have created a human player (humanplayer.py) so that we can play 
 ourselves against our implemented players.
+
 
