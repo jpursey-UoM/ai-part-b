@@ -12,14 +12,16 @@ Jason Sean Pursey <jpursey@student.unimelb.edu.au>
 
 
 
-
-
 ------------------------------
  GUIDE OF OUR DIFFERENT FILES:
 ------------------------------
 
 
-
+Different players:
+- randomplayer.py : player that takes random moves
+- humanplayer.py : player that follows the instruction given by a human
+- abplayer.py : player that uses minimax and alpha-beta pruning
+- tdplayer.py : player that uses machine learning
 
 
 
