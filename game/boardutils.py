@@ -21,7 +21,7 @@ def print_board(board):
         i += 1
 
 
-# count black and white pieces
+# count the number of black and white pieces on a board configuration
 def count(board):
     b = 0
     w = 0
@@ -33,6 +33,9 @@ def count(board):
                 w += 1
     return b, w
 
+
+#count the number of friends, enemies, edges and corners surrounding a given 
+#piece on a board configuration
 def count_adjacent(board, colour):
     if colour == "white":
         symbol = "O"
@@ -58,6 +61,7 @@ def count_adjacent(board, colour):
                     friends += w
                     enemies += b
     return friends, enemies, edges, corners
+
 
 def count_adjacent_cell(board, i, j):
     ## NOT FUCKEN WORKING
